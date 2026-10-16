@@ -1,14 +1,16 @@
 :root {
-  color-scheme: dark;
-  --bg: #101014;
-  --panel: #191920;
-  --panel-hover: #22222c;
-  --text: #f5f3f7;
-  --muted: #aaa7b4;
-  --lime: #d4ff68;
-  --purple: #b4a0ff;
-  --pink: #ff9fce;
-  --border: rgba(255, 255, 255, 0.09);
+  color-scheme: light;
+  --bg: #f8f5ff;
+  --panel: #ffffff;
+  --panel-hover: #f2edff;
+  --text: #29243a;
+  --muted: #898197;
+  --purple: #8d75db;
+  --purple-dark: #7257c8;
+  --pink: #f7b6ca;
+  --pink-light: #ffe3ec;
+  --border: #ebe4f5;
+  --green: #d8f0dc;
 }
 
 * {
@@ -19,7 +21,8 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(ellipse at 80% 0%, rgba(180, 160, 255, 0.08), transparent 38%),
+    radial-gradient(ellipse at 10% 0%, #f0e7ff, transparent 40%),
+    radial-gradient(ellipse at 100% 30%, #ffeaf1, transparent 35%),
     var(--bg);
   color: var(--text);
   font-family: "Segoe UI", Arial, sans-serif;
@@ -35,7 +38,7 @@ button {
 }
 
 button:focus-visible, input:focus-visible, a:focus-visible {
-  outline: 2px solid var(--lime);
+  outline: 2px solid var(--purple);
   outline-offset: 3px;
 }
 
@@ -51,7 +54,8 @@ button:focus-visible, input:focus-visible, a:focus-visible {
   width: 235px;
   padding: 30px 22px;
   border-right: 1px solid var(--border);
-  background: rgba(16, 16, 20, 0.92);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(14px);
 }
 
 .logo {
@@ -61,8 +65,8 @@ button:focus-visible, input:focus-visible, a:focus-visible {
   color: var(--text);
   font-size: 1.2rem;
   font-weight: 800;
-  letter-spacing: -0.7px;
   text-decoration: none;
+  letter-spacing: -0.7px;
 }
 
 .logo-mark {
@@ -70,19 +74,19 @@ button:focus-visible, input:focus-visible, a:focus-visible {
   place-items: center;
   width: 37px;
   height: 37px;
-  border-radius: 12px;
-  background: var(--lime);
-  color: var(--bg);
+  border-radius: 13px;
+  background: var(--purple);
+  color: white;
   font-size: 1.35rem;
 }
 
 .logo-dot, .heading-dot {
-  color: var(--lime);
+  color: var(--purple);
 }
 
 .side-label {
   margin: 55px 0 13px 8px;
-  color: #777582;
+  color: #a49bb4;
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 1.8px;
@@ -93,23 +97,19 @@ button:focus-visible, input:focus-visible, a:focus-visible {
   align-items: center;
   gap: 12px;
   padding: 13px;
-  border: 1px solid rgba(212, 255, 104, 0.15);
-  border-radius: 12px;
-  background: rgba(212, 255, 104, 0.08);
-  color: var(--lime);
+  border: 1px solid #e9e0ff;
+  border-radius: 13px;
+  background: #f0eaff;
+  color: var(--purple-dark);
   text-align: left;
-}
-
-.side-link span {
-  font-size: 1.15rem;
 }
 
 .sidebar-note {
   margin-top: auto;
   padding: 17px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: linear-gradient(145deg, #20202a, #17171d);
+  border: 1px solid #f1e3f6;
+  border-radius: 17px;
+  background: linear-gradient(145deg, #fff0f5, #f0eaff);
 }
 
 .note-star {
@@ -140,7 +140,7 @@ button:focus-visible, input:focus-visible, a:focus-visible {
   height: 7px;
   margin-right: 5px;
   border-radius: 50%;
-  background: var(--lime);
+  background: #79bd91;
 }
 
 .main-content {
@@ -167,7 +167,8 @@ button:focus-visible, input:focus-visible, a:focus-visible {
   padding: 7px 12px;
   border: 1px solid var(--border);
   border-radius: 999px;
-  color: var(--muted);
+  background: #fff;
+  color: var(--purple-dark);
   font-size: 0.72rem;
 }
 
@@ -191,7 +192,7 @@ h1 {
 }
 
 .gradient-text {
-  color: var(--lime);
+  color: var(--purple);
 }
 
 .hero-subtitle {
@@ -209,14 +210,14 @@ h1 {
   flex: 0 0 125px;
   width: 125px;
   height: 125px;
-  border: 1px solid rgba(212, 255, 104, 0.18);
+  border: 1px solid #e5d9ff;
   border-radius: 36px;
-  background: linear-gradient(145deg, rgba(212, 255, 104, 0.1), rgba(180, 160, 255, 0.08));
+  background: linear-gradient(145deg, #eee6ff, #ffeaf1);
   transform: rotate(4deg);
 }
 
 .hero-decoration span {
-  color: var(--lime);
+  color: var(--purple);
   font-size: 2.7rem;
 }
 
@@ -236,8 +237,9 @@ h1 {
   min-width: 0;
   padding: 19px;
   border: 1px solid var(--border);
-  border-radius: 17px;
-  background: rgba(25, 25, 32, 0.88);
+  border-radius: 19px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 24px rgba(80, 58, 120, 0.035);
 }
 
 .stat-icon {
@@ -245,18 +247,18 @@ h1 {
   place-items: center;
   width: 32px;
   height: 32px;
-  border-radius: 10px;
+  border-radius: 11px;
   font-weight: 800;
 }
 
 .lime-icon {
-  background: rgba(212, 255, 104, 0.1);
-  color: var(--lime);
+  background: #eee8ff;
+  color: var(--purple-dark);
 }
 
 .purple-icon {
-  background: rgba(180, 160, 255, 0.13);
-  color: var(--purple);
+  background: var(--pink-light);
+  color: #c65c85;
 }
 
 .stat-label {
@@ -287,7 +289,7 @@ h1 {
 
 .progress-number {
   margin-top: 7px;
-  color: var(--lime);
+  color: var(--purple-dark);
 }
 
 .progress-track {
@@ -295,14 +297,14 @@ h1 {
   margin-top: 11px;
   overflow: hidden;
   border-radius: 999px;
-  background: #33323c;
+  background: #eee8f7;
 }
 
 .progress-fill {
   width: 0;
   height: 100%;
   border-radius: inherit;
-  background: var(--lime);
+  background: linear-gradient(90deg, var(--purple), var(--pink));
   transition: width 220ms ease;
 }
 
@@ -333,6 +335,7 @@ h2 {
   padding: 6px 10px;
   border: 1px solid var(--border);
   border-radius: 999px;
+  background: #fff;
   color: var(--muted);
   font-size: 0.75rem;
 }
@@ -342,14 +345,15 @@ h2 {
   align-items: center;
   gap: 11px;
   padding: 7px;
-  border: 1px solid rgba(212, 255, 104, 0.2);
+  border: 1px solid #e6dcf8;
   border-radius: 15px;
-  background: #19191f;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(80, 58, 120, 0.04);
 }
 
 .input-plus {
   padding-left: 10px;
-  color: var(--lime);
+  color: var(--purple);
   font-size: 1.2rem;
 }
 
@@ -365,7 +369,7 @@ h2 {
 }
 
 .add-form input::placeholder {
-  color: #777582;
+  color: #aaa2b7;
 }
 
 .add-form input:focus-visible {
@@ -376,8 +380,8 @@ h2 {
   padding: 11px 15px;
   border: 0;
   border-radius: 10px;
-  background: var(--lime);
-  color: #101014;
+  background: var(--purple);
+  color: white;
   font-size: 0.8rem;
   font-weight: 800;
   white-space: nowrap;
@@ -418,13 +422,13 @@ h2 {
 }
 
 .filter-button:hover {
-  background: var(--panel-hover);
+  background: #f4efff;
 }
 
 .filter-button.active {
-  border-color: var(--border);
-  background: var(--panel-hover);
-  color: var(--lime);
+  border-color: #e7defb;
+  background: #eee8ff;
+  color: var(--purple-dark);
 }
 
 .clear-button {
@@ -432,7 +436,7 @@ h2 {
 }
 
 .clear-button:hover:not(:disabled) {
-  color: var(--pink);
+  color: #c65c85;
 }
 
 .clear-button:disabled {
@@ -454,8 +458,9 @@ h2 {
   min-width: 0;
   padding: 15px;
   border: 1px solid var(--border);
-  border-radius: 13px;
-  background: rgba(25, 25, 32, 0.88);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 5px 18px rgba(80, 58, 120, 0.025);
   animation: task-enter 180ms ease both;
 }
 
@@ -466,16 +471,16 @@ h2 {
   width: 23px;
   height: 23px;
   padding: 0;
-  border: 1px solid #777582;
+  border: 1px solid #c9bddf;
   border-radius: 7px;
-  background: transparent;
-  color: var(--bg);
+  background: #fff;
+  color: white;
   font-size: 0.85rem;
 }
 
 .task-check[aria-pressed="true"] {
-  border-color: var(--lime);
-  background: var(--lime);
+  border-color: var(--purple);
+  background: var(--purple);
 }
 
 .task-text {
@@ -486,14 +491,14 @@ h2 {
 }
 
 .task-item.completed .task-text {
-  color: #85828e;
+  color: #aaa2b7;
   text-decoration: line-through;
 }
 
 .task-meta {
   display: block;
   margin-top: 3px;
-  color: #777582;
+  color: #aaa2b7;
   font-size: 0.68rem;
   text-decoration: none;
 }
@@ -505,13 +510,13 @@ h2 {
   border: 0;
   border-radius: 9px;
   background: transparent;
-  color: var(--muted);
+  color: #a59bb4;
   font-size: 1.3rem;
 }
 
 .delete-button:hover {
-  background: rgba(255, 159, 206, 0.1);
-  color: var(--pink);
+  background: #fff0f5;
+  color: #c65c85;
 }
 
 .empty-state {
@@ -525,7 +530,7 @@ h2 {
   width: 49px;
   height: 49px;
   border-radius: 16px;
-  background: rgba(180, 160, 255, 0.12);
+  background: #eee8ff;
   color: var(--purple);
   font-size: 1.7rem;
 }
@@ -553,12 +558,12 @@ h2 {
   margin-top: 25px;
   padding: 20px 0;
   border-top: 1px solid var(--border);
-  color: #777582;
+  color: #a49bb4;
   font-size: 0.7rem;
 }
 
 .footer-heart {
-  color: var(--pink);
+  color: #e38aaa;
 }
 
 .sr-only {
@@ -609,6 +614,7 @@ h2 {
     padding: 17px 20px;
     border-right: 0;
     border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.8);
   }
 
   .side-label, .side-link, .sidebar-note {
