@@ -1,16 +1,22 @@
 "use strict";
 
-const STORAGE_KEY = "dailyTasks.v1";
+const STORAGE_KEY = "offscript.tasks.v1";
 
-const taskForm = document.getElementById("task-form");
-const taskInput = document.getElementById("task-input");
-const taskList = document.getElementById("task-list");
-const taskCount = document.getElementById("task-count");
-const progressText = document.getElementById("progress-text");
+const form = document.getElementById("task-form");
+const input = document.getElementById("task-input");
+const list = document.getElementById("task-list");
 const emptyState = document.getElementById("empty-state");
+const emptyTitle = document.getElementById("empty-title");
 const emptyMessage = document.getElementById("empty-message");
-const clearCompletedButton = document.getElementById("clear-completed");
 const statusMessage = document.getElementById("status-message");
+
+const pendingCount = document.getElementById("pending-count");
+const completedCount = document.getElementById("completed-count");
+const progressPercent = document.getElementById("progress-percent");
+const progressFill = document.getElementById("progress-fill");
+const progressCaption = document.getElementById("progress-caption");
+const listCount = document.getElementById("list-count");
+const clearCompletedButton = document.getElementById("clear-completed");
 const filterButtons = document.querySelectorAll("[data-filter]");
 
 let tasks = loadTasks();
@@ -19,11 +25,9 @@ let currentFilter = "all";
 function loadTasks() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-
     if (!saved) return [];
 
     const parsed = JSON.parse(saved);
-
     if (!Array.isArray(parsed)) return [];
 
     return parsed.filter((task) =>
@@ -33,7 +37,7 @@ function loadTasks() {
       typeof task.completed === "boolean"
     );
   } catch (error) {
-    console.error("Could not load saved tasks:", error);
+    console.error("Unable to load tasks:", error);
     return [];
   }
 }
@@ -43,8 +47,9 @@ function saveTasks() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
     return true;
   } catch (error) {
-    console.error("Could not save tasks:", error);
-    statusMessage.textContent = "Tasks could not be saved in this browser.";
+    console.error("Unable to save tasks:", error);
+    statusMessage.textContent =
+      "Your browser could not save the changes. Check storage settings.";
     return false;
   }
 }
@@ -58,17 +63,16 @@ function createId() {
 }
 
 function addTask(text) {
-  const task = {
+  tasks.unshift({
     id: createId(),
     text,
     completed: false,
     createdAt: Date.now()
-  };
+  });
 
-  tasks.unshift(task);
   saveTasks();
   renderTasks();
-  statusMessage.textContent = `Task added: ${text}`;
+  statusMessage.textContent = `Added task: ${text}`;
 }
 
 function toggleTask(id) {
@@ -83,31 +87,30 @@ function toggleTask(id) {
 }
 
 function deleteTask(id) {
-  const taskToDelete = tasks.find((task) => task.id === id);
-
-  tasks = tasks.filter((task) => task.id !== id);
+  const task = tasks.find((item) => item.id === id);
+  tasks = tasks.filter((item) => item.id !== id);
 
   saveTasks();
   renderTasks();
 
-  if (taskToDelete) {
-    statusMessage.textContent = `Task deleted: ${taskToDelete.text}`;
+  if (task) {
+    statusMessage.textContent = `Deleted task: ${task.text}`;
   }
 }
 
 function clearCompletedTasks() {
-  const completedCount = tasks.filter((task) => task.completed).length;
+  const before = tasks.length;
+  tasks = tasks.filter((task) => !task.completed);
+  const removed = before - tasks.length;
 
-  if (completedCount === 0) {
+  if (removed === 0) {
     statusMessage.textContent = "There are no completed tasks to clear.";
     return;
   }
 
-  tasks = tasks.filter((task) => !task.completed);
-
   saveTasks();
   renderTasks();
-  statusMessage.textContent = `${completedCount} completed tasks cleared.`;
+  statusMessage.textContent = `Cleared ${removed} completed tasks.`;
 }
 
 function getVisibleTasks() {
@@ -122,87 +125,114 @@ function getVisibleTasks() {
   return tasks;
 }
 
+function createTaskElement(task) {
+  const item = document.createElement("li");
+  item.className = `task-item${task.completed ? " completed" : ""}`;
+
+  const check = document.createElement("button");
+  check.type = "button";
+  check.className = "task-check";
+  check.textContent = task.completed ? "✓" : "";
+  check.setAttribute("aria-pressed", String(task.completed));
+  check.setAttribute(
+    "aria-label",
+    task.completed
+      ? `Mark ${task.text} as not completed`
+      : `Mark ${task.text} as completed`
+  );
+  check.addEventListener("click", () => toggleTask(task.id));
+
+  const textWrap = document.createElement("div");
+  textWrap.className = "task-text";
+
+  const text = document.createElement("span");
+  text.textContent = task.text;
+  textWrap.appendChild(text);
+
+  const meta = document.createElement("span");
+  meta.className = "task-meta";
+  meta.textContent = task.completed ? "Done and dusted ✓" : "One step at a time";
+  textWrap.appendChild(meta);
+
+  const remove = document.createElement("button");
+  remove.type = "button";
+  remove.className = "delete-button";
+  remove.textContent = "×";
+  remove.setAttribute("aria-label", `Delete ${task.text}`);
+  remove.addEventListener("click", () => deleteTask(task.id));
+
+  item.append(check, textWrap, remove);
+  return item;
+}
+
 function renderTasks() {
   const visibleTasks = getVisibleTasks();
-  const pendingCount = tasks.filter((task) => !task.completed).length;
-  const completedCount = tasks.length - pendingCount;
+  const pending = tasks.filter((task) => !task.completed).length;
+  const completed = tasks.length - pending;
+  const percentage = tasks.length
+    ? Math.round((completed / tasks.length) * 100)
+    : 0;
 
-  taskList.replaceChildren();
+  list.replaceChildren();
 
   visibleTasks.forEach((task) => {
-    const item = document.createElement("li");
-    item.className = `task-item${task.completed ? " completed" : ""}`;
-
-    const checkButton = document.createElement("button");
-    checkButton.type = "button";
-    checkButton.className = "task-check";
-    checkButton.textContent = task.completed ? "✓" : "";
-    checkButton.setAttribute(
-      "aria-label",
-      task.completed ? `Mark ${task.text} as pending` : `Complete ${task.text}`
-    );
-    checkButton.setAttribute("aria-pressed", String(task.completed));
-    checkButton.addEventListener("click", () => toggleTask(task.id));
-
-    const text = document.createElement("span");
-    text.className = "task-text";
-    text.textContent = task.text;
-
-    const deleteButton = document.createElement("button");
-    deleteButton.type = "button";
-    deleteButton.className = "delete-button";
-    deleteButton.textContent = "×";
-    deleteButton.setAttribute("aria-label", `Delete ${task.text}`);
-    deleteButton.addEventListener("click", () => deleteTask(task.id));
-
-    item.append(checkButton, text, deleteButton);
-    taskList.appendChild(item);
+    list.appendChild(createTaskElement(task));
   });
 
-  taskCount.textContent =
-    `${pendingCount} ${pendingCount === 1 ? "task" : "tasks"} left`;
+  pendingCount.textContent = pending;
+  completedCount.textContent = completed;
+  progressPercent.textContent = `${percentage}%`;
+  progressFill.style.width = `${percentage}%`;
 
-  progressText.textContent =
-    `${completedCount} completed out of ${tasks.length} ${
-      tasks.length === 1 ? "task" : "tasks"
-    }`;
+  progressCaption.textContent = tasks.length === 0
+    ? "Your first step starts here."
+    : percentage === 100
+      ? "Everything is done. Iconic."
+      : `${pending} ${pending === 1 ? "task" : "tasks"} to go. You got this.`;
+
+  listCount.textContent =
+    `${tasks.length} ${tasks.length === 1 ? "task" : "tasks"}`;
 
   emptyState.hidden = visibleTasks.length > 0;
 
   if (tasks.length === 0) {
-    emptyMessage.textContent = "Add your first task and get going.";
+    emptyTitle.textContent = "Your next chapter starts here.";
+    emptyMessage.textContent =
+      "Add a task above and turn that plan into action.";
   } else if (currentFilter === "pending") {
-    emptyMessage.textContent = "No pending tasks. Nice work!";
+    emptyTitle.textContent = "Nothing left pending.";
+    emptyMessage.textContent = "You're all caught up. Take a little breather.";
   } else if (currentFilter === "completed") {
-    emptyMessage.textContent = "No completed tasks yet.";
+    emptyTitle.textContent = "Your wins will show up here.";
+    emptyMessage.textContent = "Complete a task and give yourself credit.";
   } else {
-    emptyMessage.textContent = "No tasks to show.";
+    emptyTitle.textContent = "All clear.";
+    emptyMessage.textContent = "Add another task whenever you're ready.";
   }
 
   filterButtons.forEach((button) => {
-    const isActive = button.dataset.filter === currentFilter;
-    button.classList.toggle("active", isActive);
-    button.setAttribute("aria-pressed", String(isActive));
+    const active = button.dataset.filter === currentFilter;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
   });
 
-  clearCompletedButton.disabled = completedCount === 0;
-  clearCompletedButton.style.opacity = completedCount === 0 ? "0.5" : "1";
+  clearCompletedButton.disabled = completed === 0;
 }
 
-taskForm.addEventListener("submit", (event) => {
+form.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const text = taskInput.value.trim();
+  const text = input.value.trim();
 
   if (!text) {
-    statusMessage.textContent = "Please enter a task first.";
-    taskInput.focus();
+    statusMessage.textContent = "Please enter a task.";
+    input.focus();
     return;
   }
 
   addTask(text);
-  taskInput.value = "";
-  taskInput.focus();
+  input.value = "";
+  input.focus();
 });
 
 filterButtons.forEach((button) => {
@@ -213,5 +243,16 @@ filterButtons.forEach((button) => {
 });
 
 clearCompletedButton.addEventListener("click", clearCompletedTasks);
+
+const now = new Date();
+
+document.getElementById("today-date").textContent =
+  now.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric"
+  }).toUpperCase();
+
+document.getElementById("year").textContent = now.getFullYear();
 
 renderTasks();
