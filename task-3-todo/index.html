@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101014">
+  <meta name="description" content="A simple task manager that saves your tasks locally.">
+  <title>Daily Tasks | To-Do List</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Daily Tasks home">
+        <span class="brand-icon">✓</span>
+        <span>daily<span class="accent">tasks</span></span>
+      </a>
+      <span class="local-label"><span class="status-dot"></span> Saved locally</span>
+    </header>
+
+    <section class="intro">
+      <p class="eyebrow">YOUR PERSONAL SPACE</p>
+      <h1>Make room for<br><span class="accent">what matters.</span></h1>
+      <p class="subtitle">One task at a time. You've got this.</p>
+    </section>
+
+    <section class="task-panel" aria-labelledby="tasks-heading">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">YOUR LIST</p>
+          <h2 id="tasks-heading">Today's tasks</h2>
+        </div>
+        <span class="task-badge" id="task-count">0 tasks left</span>
+      </div>
+
+      <form id="task-form" class="task-form">
+        <label class="sr-only" for="task-input">Enter a new task</label>
+        <input
+          id="task-input"
+          type="text"
+          placeholder="What needs to get done?"
+          maxlength="200"
+          autocomplete="off"
+          required
+        >
+        <button class="add-button" type="submit" aria-label="Add task">+</button>
+      </form>
+
+      <div class="filters" role="group" aria-label="Filter tasks">
+        <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter-button" type="button" data-filter="pending" aria-pressed="false">Pending</button>
+        <button class="filter-button" type="button" data-filter="completed" aria-pressed="false">Completed</button>
+      </div>
+
+      <ul id="task-list" class="task-list" aria-label="Your tasks"></ul>
+
+      <div id="empty-state" class="empty-state">
+        <span class="empty-icon" aria-hidden="true">✳</span>
+        <p class="empty-title">A fresh start.</p>
+        <p id="empty-message">Add your first task and get going.</p>
+      </div>
+
+      <footer class="panel-footer">
+        <span id="progress-text">0 completed out of 0 tasks</span>
+        <button id="clear-completed" class="clear-button" type="button">Clear completed</button>
+      </footer>
+      <p id="status-message" class="sr-only" role="status" aria-live="polite"></p>
+    </section>
+
+    <footer class="page-footer">
+      <p>Small steps still move you forward.</p>
+      <p>Built with HTML, CSS &amp; JavaScript</p>
+    </footer>
+  </main>
+</body>
+</html>
