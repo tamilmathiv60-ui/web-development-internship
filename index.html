@@ -1,224 +1,524 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-          content="Tamil Mathi's personal portfolio website showcasing web development skills and projects.">
+  <title>Tamil Mathi V. | Aspiring Web Developer</title>
+  <meta name="description" content="Explore the portfolio of Tamil Mathi V., a final-year BCA student in Chennai learning front-end development, responsive design, HTML, CSS and JavaScript.">
+  <meta name="theme-color" content="#101014">
+  <meta name="author" content="Tamil Mathi V.">
 
-    <title>Tamil Mathi | Personal Portfolio</title>
+  <meta property="og:title" content="Tamil Mathi V. — Web Developer in Progress">
+  <meta property="og:description" content="A personal portfolio documenting my journey into front-end development.">
+  <meta property="og:type" content="website">
 
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- Navigation -->
-    <header class="header">
-        <a href="#home" class="logo">TM<span>.</span></a>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="logo" href="#home" aria-label="Tamil Mathi home">tm<span>.</span></a>
 
-        <button class="menu-toggle"
-                id="menu-toggle"
-                aria-label="Open navigation menu"
-                aria-expanded="false"
-                aria-controls="navigation">
-            ☰
-        </button>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="nav-links"
+      >
+        <span></span>
+        <span></span>
+      </button>
 
-        <nav class="navigation" id="navigation">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+      <div class="nav-links" id="nav-links">
+        <a class="nav-link active" href="#about">About</a>
+        <a class="nav-link" href="#skills">Skills</a>
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#contact">Contact</a>
+        <a class="button button-small button-lime nav-cta" href="#contact">
+          Let's talk <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </nav>
+  </header>
 
-    <main>
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero section container" id="home" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow">
+          <span class="status-dot" aria-hidden="true"></span>
+          BCA STUDENT <span class="eyebrow-separator">·</span> ASPIRING WEB DEVELOPER
+        </div>
 
-        <!-- Hero Section -->
-        <section class="hero" id="home">
+        <h1 id="hero-title">
+          Building my<br>
+          corner of the<br>
+          <span class="heading-accent">internet<span class="period">.</span></span>
+        </h1>
 
-            <p class="eyebrow">
-                BCA STUDENT · ASPIRING WEB DEVELOPER
-            </p>
+        <p class="hero-description">
+          Hey, I'm Tamil Mathi — a final-year BCA student learning
+          to turn ideas into clean, useful web experiences.
+          Currently growing my skills in HTML, CSS, and JavaScript.
+        </p>
 
-            <h1>
-                Hi, I'm <span class="highlight">Tamil Mathi.</span>
-            </h1>
+        <div class="hero-actions">
+          <a class="button button-lime" href="#projects">
+            Explore my work <span aria-hidden="true">↗</span>
+          </a>
+          <a class="button button-outline" href="#contact">
+            Get in touch <span aria-hidden="true">↗</span>
+          </a>
+        </div>
 
-            <h2>
-                Learning. Building. Evolving.
-            </h2>
+        <div class="hero-meta">
+          <span><span aria-hidden="true">⌖</span> Chennai, India</span>
+          <span class="meta-divider" aria-hidden="true"></span>
+          <span><span class="meta-sparkle" aria-hidden="true">✳</span> Learning by building</span>
+        </div>
+      </div>
 
-            <p class="hero-description">
-                I'm a BCA student exploring web development
-                and learning how to turn creative ideas into
-                simple, useful digital experiences.
-            </p>
+      <div class="hero-visual" aria-label="Typography-based personal design">
+        <div class="visual-grid" aria-hidden="true"></div>
 
-            <div class="hero-buttons">
-                <a href="#projects" class="button button-primary">
-                    Explore my work ↗
-                </a>
+        <span class="floating-label label-top">A LITTLE BIT OF CODE <span>↘</span></span>
+        <span class="floating-label label-side">STUDENT EDITION / 2026</span>
 
-                <a href="#contact" class="button button-secondary">
-                    Get in touch
-                </a>
+        <div class="profile-card">
+          <div class="profile-card-top">
+            <span class="card-index">PERSONAL SPACE / 001</span>
+            <span class="card-star" aria-hidden="true">✳</span>
+          </div>
+
+          <div class="monogram" aria-hidden="true">
+            <span>t</span><span>m<span class="monogram-period">.</span></span>
+          </div>
+
+          <div class="profile-card-bottom">
+            <div>
+              <p class="card-name">Tamil Mathi V.</p>
+              <p class="card-role">Learning. Making. Improving.</p>
+            </div>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+        </div>
+
+        <div class="floating-note note-lime">
+          <span class="note-icon" aria-hidden="true">✳</span>
+          <span>Currently learning<br><strong>Front-end development</strong></span>
+        </div>
+
+        <div class="floating-note note-lavender">
+          <span class="note-symbol" aria-hidden="true">&lt;/&gt;</span>
+          <span>Small steps.<br><strong>Real progress.</strong></span>
+        </div>
+
+        <span class="visual-caption">A WORK IN PROGRESS — JUST LIKE THE BEST IDEAS.</span>
+      </div>
+
+      <a class="scroll-cue" href="#about">
+        <span class="scroll-line" aria-hidden="true"></span>
+        SCROLL TO EXPLORE
+      </a>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section container about-section" id="about" aria-labelledby="about-title">
+      <div class="section-kicker">
+        <span>01 / THE PERSON BEHIND THE SCREEN</span>
+        <span class="kicker-star" aria-hidden="true">✳</span>
+      </div>
+
+      <div class="about-grid">
+        <div>
+          <h2 class="section-heading" id="about-title">
+            Curious mind.<br>
+            <span class="text-muted">Code in progress.</span>
+          </h2>
+        </div>
+
+        <div class="about-copy">
+          <p class="lead">
+            I'm a BCA student from Chennai exploring the world of
+            front-end development, one project at a time.
+          </p>
+
+          <p>
+            I'm interested in how thoughtful design and simple code
+            can come together to create websites people enjoy using.
+            I like experimenting with layouts, understanding how
+            responsive pages work, and finding better ways to bring
+            an idea to life.
+          </p>
+
+          <p>
+            I'm still learning, and that's the point. Every new
+            concept and practical project helps me grow. My goal is
+            to build a solid foundation, keep improving my skills,
+            and work towards an opportunity in web development.
+          </p>
+
+          <a class="text-link" href="#projects">
+            A peek at what I'm building <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="about-strip">
+        <div class="strip-item">
+          <span class="strip-icon strip-lime" aria-hidden="true">✳</span>
+          <div>
+            <h3>Currently studying</h3>
+            <p>Bachelor of Computer Applications</p>
+          </div>
+        </div>
+
+        <div class="strip-item">
+          <span class="strip-icon strip-pink" aria-hidden="true">⌘</span>
+          <div>
+            <h3>Currently exploring</h3>
+            <p>Front-end development</p>
+          </div>
+        </div>
+
+        <div class="strip-item">
+          <span class="strip-icon strip-purple" aria-hidden="true">↗</span>
+          <div>
+            <h3>Looking forward to</h3>
+            <p>Learning opportunities & internships</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section container skills-section" id="skills" aria-labelledby="skills-title">
+      <div class="section-kicker">
+        <span>02 / TOOLS IN MY TOOLKIT</span>
+        <span>ALWAYS LEARNING ↗</span>
+      </div>
+
+      <div class="section-intro">
+        <h2 class="section-heading" id="skills-title">
+          The skills I'm<br>
+          <span class="text-muted">growing into.</span>
+        </h2>
+        <p class="section-side-copy">
+          No inflated percentages. Just the tools I'm learning,
+          what I understand so far, and room to get better.
+        </p>
+      </div>
+
+      <div class="skills-grid">
+        <article class="skill-card">
+          <div class="skill-card-top">
+            <span class="skill-symbol html-symbol" aria-hidden="true">5</span>
+            <span class="skill-status">FOUNDATION</span>
+          </div>
+          <h3>HTML5</h3>
+          <p>
+            Learning to structure web pages with semantic elements,
+            meaningful content, and accessible markup.
+          </p>
+          <div class="skill-bottom">
+            <span>Structure & semantics</span>
+            <span aria-hidden="true">↗</span>
+          </div>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card-top">
+            <span class="skill-symbol css-symbol" aria-hidden="true">#</span>
+            <span class="skill-status">FOUNDATION</span>
+          </div>
+          <h3>CSS3</h3>
+          <p>
+            Exploring layouts, colours, typography, Flexbox, Grid,
+            and responsive styling.
+          </p>
+          <div class="skill-bottom">
+            <span>Layout & visual design</span>
+            <span aria-hidden="true">↗</span>
+          </div>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card-top">
+            <span class="skill-symbol js-symbol" aria-hidden="true">JS</span>
+            <span class="skill-status">LEARNING</span>
+          </div>
+          <h3>JavaScript</h3>
+          <p>
+            Building my understanding of programming basics,
+            DOM interactions, and simple website behaviour.
+          </p>
+          <div class="skill-bottom">
+            <span>Interactivity & logic</span>
+            <span aria-hidden="true">↗</span>
+          </div>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card-top">
+            <span class="skill-symbol git-symbol" aria-hidden="true">⌘</span>
+            <span class="skill-status">LEARNING</span>
+          </div>
+          <h3>Git & GitHub</h3>
+          <p>
+            Getting familiar with repositories, version control,
+            and keeping project code organised.
+          </p>
+          <div class="skill-bottom">
+            <span>Code & collaboration</span>
+            <span aria-hidden="true">↗</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="learning-note">
+        <span class="learning-note-icon" aria-hidden="true">✳</span>
+        <p>
+          <strong>My current mindset:</strong>
+          understand the fundamentals, practise consistently,
+          and learn by making things that actually work.
+        </p>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section container projects-section" id="projects" aria-labelledby="projects-title">
+      <div class="section-kicker">
+        <span>03 / A FEW THINGS I'M MAKING</span>
+        <span>PROCESS OVER PERFECTION</span>
+      </div>
+
+      <div class="section-intro">
+        <h2 class="section-heading" id="projects-title">
+          Ideas, meet<br>
+          <span class="text-muted">execution.</span>
+        </h2>
+        <p class="section-side-copy">
+          A growing collection of practical work.
+          Starting small, learning as I go, and building from there.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-card project-featured">
+          <div class="project-preview preview-portfolio">
+            <div class="preview-window">
+              <div class="preview-toolbar">
+                <div class="preview-dots" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+                <span>MY DIGITAL SPACE</span>
+                <span class="preview-toolbar-mark">tm.</span>
+              </div>
+
+              <div class="preview-content">
+                <span class="preview-eyebrow">HELLO, WORLD! ✳</span>
+                <div class="preview-title">Building my<br>corner of the<br><span>internet.</span></div>
+                <div class="preview-line"></div>
+                <div class="preview-footer">
+                  <span>DESIGN</span>
+                  <span>CODE</span>
+                  <span>REPEAT ↗</span>
+                </div>
+              </div>
             </div>
 
-            <p class="location">
-                📍 Chennai, Tamil Nadu, India
-            </p>
+            <span class="preview-index">PROJECT / 001</span>
+          </div>
 
-        </section>
-
-        <!-- About Section -->
-        <section class="section" id="about">
-
-            <p class="eyebrow">01 / ABOUT ME</p>
-
-            <h2>A little about me.</h2>
-
-            <p class="section-description">
-                I'm currently pursuing my Bachelor of Computer
-                Applications and developing my foundation in
-                web development.
-
-                I enjoy learning new concepts, experimenting
-                with website designs, and improving my skills
-                through practical projects.
-            </p>
-
-            <div class="about-card">
-                <div>
-                    <span class="card-label">EDUCATION</span>
-                    <h3>Bachelor of Computer Applications</h3>
-                    <p>University of Madras · Expected 2027</p>
-                </div>
-
-                <div>
-                    <span class="card-label">CURRENT FOCUS</span>
-                    <h3>Web Development</h3>
-                    <p>Learning through practice and projects.</p>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Skills Section -->
-        <section class="section" id="skills">
-
-            <p class="eyebrow">02 / MY TOOLKIT</p>
-
-            <h2>Skills I'm building.</h2>
-
-            <p class="section-description">
-                My current technical foundation and learning journey.
-            </p>
-
-            <div class="skills-grid">
-
-                <article class="skill-card">
-                    <span class="skill-number">01</span>
-                    <h3>HTML</h3>
-                    <p>Basic knowledge of webpage structure.</p>
-                </article>
-
-                <article class="skill-card">
-                    <span class="skill-number">02</span>
-                    <h3>CSS</h3>
-                    <p>Learning layouts, colours, and styling.</p>
-                </article>
-
-                <article class="skill-card">
-                    <span class="skill-number">03</span>
-                    <h3>GitHub</h3>
-                    <p>Learning repository management and project sharing.</p>
-                </article>
-
-            </div>
-
-        </section>
-
-        <!-- Projects Section -->
-        <section class="section" id="projects">
-
-            <p class="eyebrow">03 / SELECTED WORK</p>
-
-            <h2>Projects & experiments.</h2>
-
-            <p class="section-description">
-                A space to document my progress and showcase
-                projects as I build them.
-            </p>
-
-            <article class="project-card">
-
-                <div class="project-top">
-                    <span class="project-tag">PROJECT 01</span>
-                    <span class="project-status">IN PROGRESS</span>
-                </div>
-
+          <div class="project-details">
+            <div class="project-title-row">
+              <div>
+                <span class="project-label">PERSONAL PROJECT</span>
                 <h3>Personal Portfolio Website</h3>
+              </div>
+              <span class="project-number" aria-hidden="true">01</span>
+            </div>
 
-                <p>
-                    A personal website built to practise HTML,
-                    CSS, responsive layouts, and basic JavaScript.
-                </p>
-
-                <div class="project-tech">
-                    <span>HTML</span>
-                    <span>CSS</span>
-                    <span>JavaScript</span>
-                </div>
-
-                <p class="project-note">
-                    This project is part of my web development learning journey.
-                </p>
-
-            </article>
-
-        </section>
-
-        <!-- Contact Section -->
-        <section class="section contact-section" id="contact">
-
-            <p class="eyebrow">04 / CONTACT</p>
-
-            <h2>Let's connect.</h2>
-
-            <p class="section-description">
-                I'm always interested in learning, sharing ideas,
-                and connecting with people in technology.
+            <p>
+              A personal website introducing me, my skills, and my
+              web development learning journey. Built with HTML,
+              CSS, and JavaScript, with a focus on responsive design.
             </p>
 
-            <a class="button button-primary"
-               href="mailto:tamilmathiv60@gmail.com">
-                Email me ↗
+            <div class="tag-list" aria-label="Technologies used">
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>JavaScript</span>
+              <span>GitHub Pages</span>
+            </div>
+
+            <a
+              class="button button-outline project-button"
+              href="https://github.com/tamilmathiv60-ui/web-development-internship"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View the portfolio project's source code on GitHub"
+            >
+              View source <span aria-hidden="true">↗</span>
             </a>
+          </div>
+        </article>
 
-            <a class="github-link"
-               href="https://github.com/tamilmathiv60-ui"
-               target="_blank"
-               rel="noopener noreferrer">
-                Explore my GitHub profile →
+        <article class="project-card project-planned">
+          <div class="planned-preview">
+            <span class="planned-badge"><span aria-hidden="true">✳</span> ON THE IDEAS LIST</span>
+
+            <div class="planned-art" aria-hidden="true">
+              <span class="planned-orbit orbit-one"></span>
+              <span class="planned-orbit orbit-two"></span>
+              <span class="planned-orbit orbit-three"></span>
+              <span class="planned-plus plus-one">+</span>
+              <span class="planned-plus plus-two">+</span>
+              <span class="planned-center">&lt;/&gt;</span>
+            </div>
+
+            <span class="planned-bottom-label">SOMETHING NEW IS BREWING.</span>
+          </div>
+
+          <div class="project-details">
+            <div class="project-title-row">
+              <div>
+                <span class="project-label">FUTURE PROJECT</span>
+                <h3>Next up: something useful</h3>
+              </div>
+              <span class="project-number" aria-hidden="true">02</span>
+            </div>
+
+            <p>
+              A future hands-on project to practise front-end
+              fundamentals and explore more interactive web
+              experiences. The idea and implementation are
+              still to come.
+            </p>
+
+            <div class="tag-list">
+              <span>PLANNED</span>
+              <span>LEARNING IN PROGRESS</span>
+            </div>
+
+            <span class="planned-link">
+              Coming soon <span aria-hidden="true">↗</span>
+            </span>
+          </div>
+        </article>
+      </div>
+
+      <div class="github-note">
+        <div>
+          <span class="github-note-kicker">THE CODE LIVES HERE</span>
+          <h3>Curious about my progress?</h3>
+          <p>Explore my GitHub profile for my repositories and learning work.</p>
+        </div>
+        <a
+          class="button button-lime"
+          href="https://github.com/tamilmathiv60-ui"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Visit GitHub <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section container contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="contact-card">
+        <div class="contact-decoration" aria-hidden="true">
+          <span class="contact-star">✳</span>
+          <span class="contact-orbit"></span>
+          <span class="contact-plus">+</span>
+        </div>
+
+        <div class="section-kicker">
+          <span>04 / YOUR TURN</span>
+          <span>MY INBOX IS OPEN</span>
+        </div>
+
+        <div class="contact-main">
+          <div>
+            <p class="contact-pretitle">GOT SOMETHING IN MIND?</p>
+            <h2 class="contact-heading" id="contact-title">
+              Have an opportunity<br>
+              or an idea?<br>
+              <span>Say hi<span class="period">.</span></span>
+            </h2>
+          </div>
+
+          <div class="contact-copy">
+            <p>
+              I'm open to learning opportunities, beginner-friendly
+              internships, and connecting with people in tech.
+              If you'd like to talk about an opportunity or share an idea,
+              I'd love to hear from you.
+            </p>
+
+            <a class="button button-lime contact-email" href="mailto:tamilmathiv60@gmail.com">
+              Email me <span aria-hidden="true">↗</span>
             </a>
+          </div>
+        </div>
 
-        </section>
+        <div class="contact-details">
+          <a class="contact-detail" href="mailto:tamilmathiv60@gmail.com">
+            <span class="detail-icon" aria-hidden="true">↗</span>
+            <span>
+              <span class="detail-label">EMAIL</span>
+              <span class="detail-value">tamilmathiv60@gmail.com</span>
+            </span>
+          </a>
 
-    </main>
+          <a
+            class="contact-detail"
+            href="https://github.com/tamilmathiv60-ui"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="detail-icon" aria-hidden="true">⌘</span>
+            <span>
+              <span class="detail-label">GITHUB</span>
+              <span class="detail-value">tamilmathiv60-ui</span>
+            </span>
+          </a>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <a href="#home" class="logo">TM<span>.</span></a>
+          <div class="contact-detail">
+            <span class="detail-icon" aria-hidden="true">⌖</span>
+            <span>
+              <span class="detail-label">LOCATION</span>
+              <span class="detail-value">Chennai, Tamil Nadu, India</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        <p>Designed and built while learning.</p>
+  <!-- FOOTER -->
+  <footer class="site-footer container">
+    <a class="logo footer-logo" href="#home" aria-label="Back to home">tm<span>.</span></a>
 
-        <p>© <span id="year">2026</span> Tamil Mathi</p>
-    </footer>
+    <div class="footer-middle">
+      <p>Made with curiosity, a little code, and lots of learning.</p>
+      <p class="copyright">© <span id="current-year">2026</span> Tamil Mathi V.</p>
+    </div>
 
+    <a class="back-to-top" href="#home">
+      Back to top <span aria-hidden="true">↑</span>
+    </a>
+  </footer>
 </body>
 </html>
