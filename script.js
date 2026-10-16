@@ -1,232 +1,118 @@
 "use strict";
 
-/* =========================================================
-   TAMIL MATHI V. — PORTFOLIO INTERACTIONS
-   Vanilla JavaScript. No libraries required.
-   ========================================================= */
-
-document.documentElement.classList.remove("no-js");
-document.documentElement.classList.add("js");
+document.documentElement.classList.replace("no-js", "js");
 
 document.addEventListener("DOMContentLoaded", () => {
-  const menuToggle = document.querySelector(".menu-toggle");
-  const navLinks = document.querySelector(".nav-links");
+  const toggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav-links");
   const navItems = document.querySelectorAll(".nav-link");
-  const yearElement = document.getElementById("current-year");
-  const reducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
+  const year = document.getElementById("current-year");
 
-  /* 1. AUTOMATIC FOOTER YEAR */
-
-  if (yearElement) {
-    yearElement.textContent = String(new Date().getFullYear());
+  if (year) {
+    year.textContent = new Date().getFullYear();
   }
 
-  /* 2. MOBILE NAVIGATION */
-
   function closeMenu() {
-    if (!menuToggle || !navLinks) return;
-
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Open navigation menu");
-    navLinks.classList.remove("is-open");
+    if (!toggle || !nav) return;
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open navigation menu");
+    nav.classList.remove("is-open");
     document.body.classList.remove("menu-open");
   }
 
-  function openMenu() {
-    if (!menuToggle || !navLinks) return;
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => {
+      const open = toggle.getAttribute("aria-expanded") === "true";
 
-    menuToggle.setAttribute("aria-expanded", "true");
-    menuToggle.setAttribute("aria-label", "Close navigation menu");
-    navLinks.classList.add("is-open");
-    document.body.classList.add("menu-open");
-  }
+      toggle.setAttribute("aria-expanded", String(!open));
+      toggle.setAttribute(
+        "aria-label",
+        open ? "Open navigation menu" : "Close navigation menu"
+      );
 
-  if (menuToggle && navLinks) {
-    menuToggle.addEventListener("click", () => {
-      const isExpanded =
-        menuToggle.getAttribute("aria-expanded") === "true";
-
-      if (isExpanded) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
+      nav.classList.toggle("is-open", !open);
+      document.body.classList.toggle("menu-open", !open);
     });
 
-    // Close the menu after navigating to a section.
-    navLinks.querySelectorAll("a").forEach((link) => {
+    nav.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", closeMenu);
     });
 
-    // Close the menu with the Escape key.
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
-        const wasOpen =
-          menuToggle.getAttribute("aria-expanded") === "true";
-
+        const wasOpen = toggle.getAttribute("aria-expanded") === "true";
         closeMenu();
-
-        if (wasOpen && window.innerWidth <= 720) {
-          menuToggle.focus();
-        }
+        if (wasOpen) toggle.focus();
       }
     });
 
-    // Reset menu state when returning to desktop width.
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 720) {
-        closeMenu();
-      }
-    });
-
-    // Close when clicking outside the open navigation.
     document.addEventListener("click", (event) => {
-      const isExpanded =
-        menuToggle.getAttribute("aria-expanded") === "true";
-
       if (
-        isExpanded &&
-        !navLinks.contains(event.target) &&
-        !menuToggle.contains(event.target)
+        toggle.getAttribute("aria-expanded") === "true" &&
+        !nav.contains(event.target) &&
+        !toggle.contains(event.target)
       ) {
         closeMenu();
       }
     });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 720) closeMenu();
+    });
   }
 
-  /* 3. ACTIVE SECTION NAVIGATION */
+  const sections = document.querySelectorAll("main section[id]");
 
-  const sections = Array.from(
-    document.querySelectorAll("main section[id]")
-  );
-
-  function setActiveLink(sectionId) {
+  function updateActiveLink(id) {
     navItems.forEach((link) => {
-      const isActive = link.getAttribute("href") === `#${sectionId}`;
+      const active = link.getAttribute("href") === `#${id}`;
+      link.classList.toggle("active", active);
 
-      if (isActive) {
-        link.classList.add("active");
+      if (active) {
         link.setAttribute("aria-current", "location");
       } else {
-        link.classList.remove("active");
         link.removeAttribute("aria-current");
       }
     });
   }
 
-  if ("IntersectionObserver" in window && sections.length > 0) {
-    const sectionObserver = new IntersectionObserver(
-      (entries) => {
-        const visibleSections = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) =>
-              b.intersectionRatio - a.intersectionRatio
-          );
+  if ("IntersectionObserver" in window) {
+    const sectionObserver = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
 
-        if (visibleSections.length > 0) {
-          setActiveLink(visibleSections[0].target.id);
+      if (visible.length) updateActiveLink(visible[0].target.id);
+    }, {
+      rootMargin: "-18% 0px -60% 0px",
+      threshold: [0, 0.1, 0.25, 0.5]
+    });
+
+    sections.forEach((section) => sectionObserver.observe(section));
+  }
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    const elements = document.querySelectorAll(
+      ".about-grid, .about-strip, .section-intro, " +
+      ".skill-card, .learning-note, .project-card, " +
+      ".github-note, .contact-main, .contact-details"
+    );
+
+    elements.forEach((element) => element.classList.add("reveal"));
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
         }
-      },
-      {
-        rootMargin: "-18% 0px -60% 0px",
-        threshold: [0, 0.1, 0.25, 0.5]
-      }
-    );
+      });
+    }, { threshold: 0.12 });
 
-    sections.forEach((section) => {
-      sectionObserver.observe(section);
-    });
-  } else if (sections.length > 0) {
-    // Fallback for browsers without IntersectionObserver.
-    window.addEventListener(
-      "scroll",
-      () => {
-        let currentSection = sections[0];
-
-        sections.forEach((section) => {
-          if (section.getBoundingClientRect().top <= 160) {
-            currentSection = section;
-          }
-        });
-
-        setActiveLink(currentSection.id);
-      },
-      { passive: true }
-    );
+    elements.forEach((element) => revealObserver.observe(element));
   }
-
-  /* 4. SUBTLE SCROLL REVEALS */
-
-  const revealSelectors = [
-    ".about-grid",
-    ".about-strip",
-    ".section-intro",
-    ".skill-card",
-    ".learning-note",
-    ".project-card",
-    ".github-note",
-    ".contact-main",
-    ".contact-details"
-  ];
-
-  const revealElements = document.querySelectorAll(
-    revealSelectors.join(", ")
-  );
-
-  if (
-    !reducedMotion &&
-    "IntersectionObserver" in window
-  ) {
-    revealElements.forEach((element) => {
-      element.classList.add("reveal");
-    });
-
-    const revealObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.12,
-        rootMargin: "0px 0px -30px 0px"
-      }
-    );
-
-    revealElements.forEach((element) => {
-      revealObserver.observe(element);
-    });
-  }
-
-  /* 5. INTERNAL LINK FALLBACK */
-
-  // Ensure the home link and other section links work normally.
-  // No click interception is needed; the browser handles anchors.
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", () => {
-      const targetId = link.getAttribute("href");
-
-      if (!targetId || targetId === "#") return;
-
-      const target = document.getElementById(targetId.slice(1));
-
-      if (target) {
-        target.setAttribute("tabindex", "-1");
-
-        target.addEventListener(
-          "blur",
-          () => {
-            target.removeAttribute("tabindex");
-          },
-          { once: true }
-        );
-      }
-    });
-  });
 });
